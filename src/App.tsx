@@ -1,17 +1,35 @@
 import React, {useEffect, useState} from 'react';
 import { initUser } from './helper/initializer';
 import './App.css';
-import { IName, IUser } from './userInterface';
+import { IName, IUser } from './helper/userInterface';
 import { getRandomUser } from './api/dataManagement';
 
 
 function App() {
   const [user, setUser] = useState<IUser>(initUser); //to create a init user
+  const [userFirstName, setuserFirstName] = useState("");
+  const [userLastName, setuserLastName] = useState("");
+
   let fakeIndex = 0;
 
   const fetchData = async () => {
     const response: IUser = await getRandomUser();
     setUser(response);
+    setuserFirstName(response.name.first);
+    setuserLastName(response.name.last);
+    console.log("name: ", userFirstName ," " , userLastName)
+  }
+
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+
+  }
+
+  const handleClick = () => {
+    console.log("userFirstName:", userFirstName)
+    console.log("userLastName:", userLastName)
+    user.name.first = userFirstName;
+    user.name.last = userLastName;
   }
 
   useEffect(() => {
@@ -27,8 +45,8 @@ function App() {
           Random User App
         </header>
         <h1> User info:</h1>
-        <article className="App-userInfo">
-          <li key={fakeIndex+1}>Name: {user.name.first} {user.name.last}</li>
+        <section className="App-userInfo">
+          <li key={fakeIndex+1}>Name: {userFirstName} {userLastName}</li>
           <li key={fakeIndex+2}>Age: {user.dob.age}, birthday: {user.dob.date.toString()}</li>
           <li key={fakeIndex+3}>Gender: {user.gender}</li>
           <br/>
@@ -41,9 +59,15 @@ function App() {
           <li key={fakeIndex+5}>Contacts: <br/> Email: {user.email}, <br/> phone: {user.email}, <br/> cell: {user.cell}</li>
           
           <br />
-        </article>        
-        <section>
-        
+        </section>        
+
+        <section className='App-section-form'>
+          <form className='form' onSubmit={handleSubmit}> 
+              <label>First Name:</label>
+              <input type="text" onChange={(e) => {setuserFirstName(e.target.value)}} value={userFirstName}></input>
+              <label>Last Name:</label>
+              <input type="text" onChange={(e) => {setuserLastName(e.target.value)}} value={userLastName}></input>
+          </form>
         </section>
       </>
       }

@@ -23,6 +23,23 @@
   color: #282c34;
 }
 
+.App-section-form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 15vw;
+}
+
+.update-btn {
+  min-width: 15vw;
+  min-height: 1.5vw;
+}
+
 .App-link {
   color: #61dafb;
 }
