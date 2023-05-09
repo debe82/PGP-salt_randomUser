@@ -17,7 +17,6 @@ function App() {
     setUser(response);
     setuserFirstName(response.name.first);
     setuserLastName(response.name.last);
-    console.log("name: ", userFirstName ," " , userLastName)
   }
 
   const handleSubmit = (e: any) => {
@@ -26,8 +25,6 @@ function App() {
   }
 
   const handleClick = () => {
-    console.log("userFirstName:", userFirstName)
-    console.log("userLastName:", userLastName)
     user.name.first = userFirstName;
     user.name.last = userLastName;
   }
@@ -52,17 +49,24 @@ function App() {
           <br/>
           <li key={fakeIndex+4}>Address: 
             <br/> Street: {user.location.street.name} {user.location.street.number} 
-            <br/> city: {user.location.city}, <br/> country: {user.location.country},
+            <br/> City: {user.location.city} 
+            <br/> country: {user.location.country}
             <br/> Postcode: {user.location.postcode} 
-            <br/> Coordinates: {user.location.coordinates.latitude}, {user.location.coordinates.longitude}</li>
+            <br/> Coordinates: {user.location.coordinates.latitude}, {user.location.coordinates.longitude}
+          </li>
             <br/>
-          <li key={fakeIndex+5}>Contacts: <br/> Email: {user.email}, <br/> phone: {user.email}, <br/> cell: {user.cell}</li>
+          <li key={fakeIndex+5}>Contacts: 
+            <br/> Email: {user.email} 
+            <br/> Phone: {user.phone} 
+            <br/> cell: {user.cell}
+          </li>
           
           <br />
         </section>        
 
+        <h1>Form for update:</h1>
         <section className='App-section-form'>
-          <form className='form' onSubmit={handleSubmit}> 
+          <form className='form'> 
               <label>First Name:</label>
               <input type="text" onChange={(e) => {setuserFirstName(e.target.value)}} value={userFirstName}></input>
               <label>Last Name:</label>
