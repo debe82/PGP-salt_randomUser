@@ -19,16 +19,6 @@ function App() {
     setuserLastName(response.name.last);
   }
 
-  const handleSubmit = (e: any) => {
-    e.preventDefault();
-
-  }
-
-  const handleClick = () => {
-    user.name.first = userFirstName;
-    user.name.last = userLastName;
-  }
-
   useEffect(() => {
     fetchData();
   }, []);
